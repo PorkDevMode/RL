@@ -3,6 +3,7 @@
 #include "includes/memory/memory.h"
 #include "includes/roblox/DataModel.h"
 #include "includes/roblox/Players.h"
+#include "includes/roblox/Humanoid.h"
 
 void main_loop() {
 	while (true) {
@@ -31,10 +32,15 @@ int main() {
 	RBX::Players players = RBX::DataModel::get().find_first_child("Players").as<RBX::Players>();
 	RBX::Player localplayer = players.get_local_player();
 	RBX::Instance character = localplayer.get_character();
+	RBX::Humanoid humanoid = character.find_first_child("Humanoid").as<RBX::Humanoid>();
 
 	players.debug_print();
 	localplayer.debug_print();
 	character.debug_print();
+	humanoid.debug_print();
 
+	int a{};
+	std::cin >> a;
+	humanoid.set_walkspeed(a);
 	std::cin.get();
 }

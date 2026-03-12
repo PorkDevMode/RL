@@ -1,7 +1,7 @@
 #include "../BasePart.h"
 
 bool RBX::BasePart::valid_class() const {
-	if (!m_address || class_name() != "BasePart")
+	if (!m_address || class_name() != "Part")
 		return false;
 	return true;
 }
@@ -15,6 +15,29 @@ Vector3 RBX::BasePart::get_position() const {
 		return {};
 
 	return mem.read<Vector3>(primitive + Offsets::Primitive::Position);
+}
+
+float RBX::BasePart::get_position(int axis) const {
+	if (!valid_class())
+		return 0.0f;
+
+	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
+	if (!primitive)
+		return 0.0f;
+
+	uintptr_t position_addr = primitive + Offsets::Primitive::Position;
+
+	switch (axis) {
+	case 1:
+		return mem.read<float>(position_addr);
+	case 2:
+		return mem.read<float>(position_addr + 0x4);
+	case 3:
+		return mem.read<float>(position_addr + 0x8);
+	default:
+		break;
+	}
+    return 0.0f;
 }
 
 void RBX::BasePart::set_position(Vector3 pos) const {

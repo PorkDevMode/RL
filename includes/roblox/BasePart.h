@@ -8,6 +8,7 @@ namespace RBX {
 		BasePart() = default;
 		explicit BasePart(uintptr_t instance_address) : Instance(instance_address) {}
 		Vector3 get_position() const;
+		float get_position(int axis) const;
 		void set_position(Vector3 pos) const;
 		void set_position(int axis, float value) const;
 

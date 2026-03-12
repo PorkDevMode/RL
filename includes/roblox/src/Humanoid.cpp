@@ -6,9 +6,9 @@ bool RBX::Humanoid::class_valid() const {
     return true;
 }
 
-void RBX::Humanoid::set_walkspeed(int walkspeed) const {
+void RBX::Humanoid::set_walkspeed(float walkspeed) const {
     if (!class_valid())
 	return;
-    mem.write<int>(m_address + Offsets::Humanoid::WalkspeedCheck, walkspeed);
-    mem.write<int>(m_address + Offsets::Humanoid::Walkspeed, walkspeed);
+    mem.write<float>(m_address + Offsets::Humanoid::WalkspeedCheck, walkspeed);
+    mem.write<float>(m_address + Offsets::Humanoid::Walkspeed, walkspeed);
 }

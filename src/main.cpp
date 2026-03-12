@@ -4,6 +4,7 @@
 #include "includes/roblox/DataModel.h"
 #include "includes/roblox/Players.h"
 #include "includes/roblox/Humanoid.h"
+#include "includes/roblox/BasePart.h"
 
 void main_loop() {
 	while (true) {
@@ -33,14 +34,29 @@ int main() {
 	RBX::Player localplayer = players.get_local_player();
 	RBX::Instance character = localplayer.get_character();
 	RBX::Humanoid humanoid = character.find_first_child("Humanoid").as<RBX::Humanoid>();
+	RBX::BasePart basepart = character.find_first_child("HumanoidRootPart").as<RBX::BasePart>();
 
 	players.debug_print();
 	localplayer.debug_print();
 	character.debug_print();
 	humanoid.debug_print();
+	basepart.debug_print();
 
-	int a{};
-	std::cin >> a;
-	humanoid.set_walkspeed(a);
+	float x {basepart.get_position(1)};
+	float y {basepart.get_position(2)};
+	float z {basepart.get_position(3)};
+	std::cout << x;
+	float wanted_position {x - 50};
+	int count {0};
+	while(x != wanted_position){
+	    for (int i {}; i < 500; i++){
+		basepart.set_position(1, wanted_position);
+		basepart.set_position(3, z + 1);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+	    }
+	    x = basepart.get_position(1);
+	    count++;
+	}
+	std::cout << count;
 	std::cin.get();
 }

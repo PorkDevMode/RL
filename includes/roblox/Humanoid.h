@@ -5,10 +5,6 @@ namespace RBX {
 	public: 
 	    Humanoid() = default;
 	    explicit Humanoid(uintptr_t instance_address) : Instance(instance_address){};
-<<<<<<< HEAD
-	    void set_walkspeed(float walkspeed) const;
-	private :
-=======
 	    void set_walkspeed(int walkspeed) const;
 	private:
 >>>>>>> 895b24ef88816d4bc9043b3873c0441dbd2d2e8e

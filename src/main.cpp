@@ -41,22 +41,4 @@ int main() {
 	character.debug_print();
 	humanoid.debug_print();
 	basepart.debug_print();
-
-	float x {basepart.get_position(1)};
-	float y {basepart.get_position(2)};
-	float z {basepart.get_position(3)};
-	std::cout << x;
-	float wanted_position {x - 50};
-	int count {0};
-	while(x != wanted_position){
-	    for (int i {}; i < 500; i++){
-		basepart.set_position(1, wanted_position);
-		basepart.set_position(3, z + 1);
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-	    }
-	    x = basepart.get_position(1);
-	    count++;
-	}
-	std::cout << count;
-	std::cin.get();
 }

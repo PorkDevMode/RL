@@ -17,7 +17,7 @@ Vector3 RBX::BasePart::get_position() const {
 	return mem.read<Vector3>(primitive + Offsets::Primitive::Position);
 }
 
-float RBX::BasePart::get_position(int axis) const {
+float RBX::BasePart::get_position(Axis axis) const {
 	if (!valid_class())
 		return 0.0f;
 
@@ -28,11 +28,11 @@ float RBX::BasePart::get_position(int axis) const {
 	uintptr_t position_addr = primitive + Offsets::Primitive::Position;
 
 	switch (axis) {
-	case 1:
+	case Axis::X:
 		return mem.read<float>(position_addr);
-	case 2:
+	case Axis::Y:
 		return mem.read<float>(position_addr + 0x4);
-	case 3:
+	case Axis::Z:
 		return mem.read<float>(position_addr + 0x8);
 	default:
 		break;
@@ -51,7 +51,7 @@ void RBX::BasePart::set_position(Vector3 pos) const {
 	mem.write<Vector3>(primitive + Offsets::Primitive::Position, pos);
 }
 
-void RBX::BasePart::set_position(int axis, float value) const {
+void RBX::BasePart::set_position(Axis axis, float value) const {
 	if (!valid_class())
 		return;
 
@@ -62,13 +62,13 @@ void RBX::BasePart::set_position(int axis, float value) const {
 	uintptr_t position_addr = primitive + Offsets::Primitive::Position;
 
 	switch (axis) {
-	case 1:
+	case Axis::X:
 		mem.write<float>(position_addr, value);
 		break;
-	case 2:
+	case Axis::Y:
 		mem.write<float>(position_addr + 0x4, value);
 		break;
-	case 3:
+	case Axis::Z:
 		mem.write<float>(position_addr + 0x8, value);
 		break;
 	default:

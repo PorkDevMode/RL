@@ -1,13 +1,24 @@
 #include "../BasePart.h"
 
-bool RBX::BasePart::valid_class() const {
-	if (!m_address || class_name() != "Part")
+bool RBX::BasePart::valid_part() const {
+	if (!m_address)
 		return false;
-	return true;
+
+	if (m_valid_class_name)
+		return true;
+
+	for (const std::string& str : m_valid_class_names) {
+		if (class_name() == str) {
+			m_valid_class_name = true;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 Vector3 RBX::BasePart::get_position() const {
-	if (!this->valid_class())
+	if (!valid_part())
 		return {};
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -18,7 +29,7 @@ Vector3 RBX::BasePart::get_position() const {
 }
 
 float RBX::BasePart::get_position(Axis axis) const {
-	if (!valid_class())
+	if (!valid_part())
 		return 0.0f;
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -41,7 +52,7 @@ float RBX::BasePart::get_position(Axis axis) const {
 }
 
 void RBX::BasePart::set_position(Vector3 pos) const {
-	if (!valid_class())
+	if (!valid_part())
 		return;
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -52,7 +63,7 @@ void RBX::BasePart::set_position(Vector3 pos) const {
 }
 
 void RBX::BasePart::set_position(Axis axis, float value) const {
-	if (!valid_class())
+	if (!valid_part())
 		return;
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -77,7 +88,7 @@ void RBX::BasePart::set_position(Axis axis, float value) const {
 }
 
 Vector3 RBX::BasePart::get_rotation() const {
-	if (!valid_class())
+	if (!valid_part())
 		return {};
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -88,7 +99,7 @@ Vector3 RBX::BasePart::get_rotation() const {
 }
 
 void RBX::BasePart::set_rotation(Vector3 rotation) const {
-	if (!valid_class())
+	if (!valid_part())
 		return;
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -98,8 +109,8 @@ void RBX::BasePart::set_rotation(Vector3 rotation) const {
 	mem.write<Vector3>(m_address + Offsets::Primitive::Rotation, rotation);
 }
 
-void RBX::BasePart::set_rotation(int axis, float value) const {
-	if (!valid_class())
+void RBX::BasePart::set_rotation(Axis axis, float value) const {
+	if (!valid_part())
 		return;
 
 	uintptr_t primitive = mem.read<uintptr_t>(m_address + Offsets::BasePart::Primitive);
@@ -109,13 +120,13 @@ void RBX::BasePart::set_rotation(int axis, float value) const {
 	uintptr_t rotation_addr = primitive + Offsets::Primitive::Rotation;
 
 	switch (axis) {
-	case 1:
+	case Axis::X:
 		mem.write<float>(rotation_addr, value);
 		break;
-	case 2:
+	case Axis::Y:
 		mem.write<float>(rotation_addr + 0x4, value);
 		break;
-	case 3:
+	case Axis::Z:
 		mem.write<float>(rotation_addr + 0x8, value);
 		break;
 	default:

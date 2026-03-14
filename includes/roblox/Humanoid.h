@@ -70,7 +70,6 @@ namespace RBX {
 
 		float get_walkspeed() const;
 	    void set_walkspeed(float walkspeed) const;
-		void set_walkspeed(int walkspeed) const;
 		
 		float get_hipheight() const;
 		void set_hipheight(float value) const;

@@ -9,6 +9,9 @@ bool RBX::Humanoid::class_valid() const {
 }
 
 float RBX::Humanoid::get_walkspeed() const {
+    if (!class_valid())
+        return 0.0f;
+    return mem.read<float>(m_address + Offsets::Humanoid::Walkspeed);
 }
 
 void RBX::Humanoid::set_walkspeed(float walkspeed) const {

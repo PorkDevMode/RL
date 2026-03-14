@@ -10,6 +10,12 @@ struct Vector2 {
 	float x, y;
 };
 
+struct Color3 {
+	float r, g, b;
+};
+
+// Humanoid
+
 enum class HumanoidStateType { // with roblox enum classs that are important in memory define the number they are assigned to
 	FallingDown = 0,
 	Ragdoll = 1,
@@ -107,6 +113,16 @@ enum class DisplayDistanceType {
 	Viewer = 0,
 	Subject = 1,
 	None = 2
+};
+
+// basepart
+
+enum class PartType {
+	Ball = 0,
+	Block = 1,
+	Cylinder = 2,
+	Wedge = 3,
+	CornerWedge = 4
 };
 
 inline uintptr_t ShutUpFuckingWarning = 0; // death to clangd

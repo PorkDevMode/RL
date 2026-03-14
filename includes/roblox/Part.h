@@ -1,5 +1,4 @@
 #pragma once
-#include "Instance.h"
 #include "BasePart.h"
 
 namespace RBX {

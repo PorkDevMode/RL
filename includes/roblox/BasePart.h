@@ -3,7 +3,7 @@
 #include "Instance.h"
 
 namespace RBX {
-	class BasePart : public RBX::Instance {
+	class BasePart : public RBX::Instance { // basepart is inherited by many classes it is not its own specific class, TODO: make it inheritable and scalable
 	public:
 		BasePart() = default;
 		explicit BasePart(uintptr_t instance_address) : Instance(instance_address) {}
@@ -16,6 +16,6 @@ namespace RBX {
 		void set_rotation(Vector3 rotation) const;
 		void set_rotation(int axis, float value) const;
 	private:
-		bool valid_class() const;
+		bool valid_class() const; // TODO: need to verify many class names here
 	};
 }

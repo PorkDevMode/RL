@@ -28,8 +28,17 @@ namespace RBX {
 		bool get_requires_neck() const;
 		void set_requires_neck(bool value) const;
 
+		bool get_jump() const;
+		void set_jump() const;
+
+		bool get_auto_rotate() const;
+		void set_auto_rotate(bool value) const;
+
 		std::string get_display_name() const;
 		void set_display_name(std::string name) const;
+
+		DisplayDistanceType get_display_distance_type() const;
+		void set_display_distance_type(DisplayDistanceType type) const;
 
 		HumanoidStateType get_humanoid_state() const;
 		void set_humanoid_state(HumanoidStateType type) const;
@@ -44,7 +53,10 @@ namespace RBX {
 		void set_health_display_type(HealthDisplayType type) const;
 
 		Instance get_seat_part() const;
-		void set_seat_part(const Instance& instance) const;
+		void set_seat_part(const Instance& instance) const; // slippery slope, readonly.
+
+		Instance get_humanoid_root_part() const;
+		void set_humanoid_root_part(const Instance& instance) const; // slippery slope, readonly.
 
 		Vector3 get_camera_offset() const;
 		void set_camera_offset(Vector3 offset) const;

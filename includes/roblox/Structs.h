@@ -10,7 +10,7 @@ struct Vector2 {
 	float x, y;
 };
 
-enum HumanoidStateType { // with roblox enums that are important in memory define the number they are assigned to
+enum class HumanoidStateType { // with roblox enum classs that are important in memory define the number they are assigned to
 	FallingDown = 0,
 	Ragdoll = 1,
 	GettingUp = 2,
@@ -30,32 +30,32 @@ enum HumanoidStateType { // with roblox enums that are important in memory defin
 	None = 18
 };
 
-enum NameOcclusion {
+enum class NameOcclusion {
 	NoOcclusion = 0,
 	EnemyOcclusion = 1,
 	OccludeAll = 2
 };
 
-enum HumanoidRigType {
+enum class HumanoidRigType {
 	R15 = 0,
 	CustomHumanoid = 1,
 	Custom = 2,
-	NoneL = 3 // named NoneL if u dont like it fuck yourself
+	None = 3
 };
 
-enum HealthDisplayType {
+enum class HealthDisplayType {
 	DisplayWhenDamaged = 0,
 	AlwaysOn = 1,
 	AlwaysOff =2
 };
 
-enum Axis { // dont matter defining
+enum class Axis { // dont matter defining
 	X,
 	Y,
 	Z
 };
 
-enum Material {
+enum class Material {
     Plastic = 256,
     SmoothPlastic = 272,
     Neon = 288,
@@ -101,6 +101,12 @@ enum Material {
     Leather = 2309,
     Plaster = 2310,
     Rubber = 2311
+};
+
+enum class DisplayDistanceType {
+	Viewer = 0,
+	Subject = 1,
+	None = 2
 };
 
 inline uintptr_t ShutUpFuckingWarning = 0; // death to clangd

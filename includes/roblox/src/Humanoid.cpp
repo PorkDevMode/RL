@@ -1,4 +1,5 @@
 #include "../Humanoid.h"
+#include "includes/roblox/Offsets.h"
 
 bool RBX::Humanoid::class_valid() const {
     if (!m_address || class_name() != "Humanoid")
@@ -17,78 +18,100 @@ void RBX::Humanoid::set_walkspeed(float walkspeed) const {
 }
 
 bool RBX::Humanoid::get_autojump() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::AutoJumpEnabled);
 }
 
 void RBX::Humanoid::set_autojump(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::AutoJumpEnabled, value);
 }
-
-
-bool RBX::Humanoid::get_use_jump_power() const {
-
-}
-
-void RBX::Humanoid::set_use_jump_power(bool value) const {
-
-}
-
 
 bool RBX::Humanoid::get_evaluate_state_machine() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::EvaluateStateMachine);
 }
 
 void RBX::Humanoid::set_evaulate_state_machine(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.read<bool>(m_address + Offsets::Humanoid::AutoJumpEnabled);
 }
 
 
 bool RBX::Humanoid::get_sit() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::Sit);
 }
 
 void RBX::Humanoid::set_sit(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::Sit, value);
 }
 
 bool RBX::Humanoid::get_platform_stand() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::PlatformStand);
 }
 
 void RBX::Humanoid::set_platform_stand(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::PlatformStand, value);
 }
 
 bool RBX::Humanoid::get_walking() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::IsWalking);
 }
 
 void RBX::Humanoid::set_walking(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::IsWalking, value);
 }
 
 bool RBX::Humanoid::get_requires_neck() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::RequiresNeck);
 }
 
 void RBX::Humanoid::set_requires_neck(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::RequiresNeck, value);
 }
 
 bool RBX::Humanoid::get_jump() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::Jump);
 }
 
 void RBX::Humanoid::set_jump() const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::Jump, true);
 }
 
 bool RBX::Humanoid::get_auto_rotate() const {
-
+    if (!class_valid())
+        return false;
+    return mem.read<bool>(m_address + Offsets::Humanoid::AutoRotate);
 }
 
 void RBX::Humanoid::set_auto_rotate(bool value) const {
-
+    if (!class_valid())
+        return;
+    mem.write<bool>(m_address + Offsets::Humanoid::AutoRotate, value);
 }
 
 std::string RBX::Humanoid::get_display_name() const { // PORK

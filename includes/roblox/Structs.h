@@ -1,6 +1,7 @@
 #pragma once
 
-#include <cstdint>
+#include <variant>
+#include <string>
 
 struct Vector3 {
 	float x, y, z;
@@ -123,6 +124,64 @@ enum class PartType {
 	Cylinder = 2,
 	Wedge = 3,
 	CornerWedge = 4
+};
+
+struct UDim {
+    float scale_x;
+    int offset_x;
+};
+
+struct UDim2 {
+    float scale_x;
+    int offset_x;
+    float scale_y;
+    int offset_;
+};
+
+struct Matrix3 {
+    float elt[ 3 ][ 3 ];
+};
+
+struct CFrame {
+    Matrix3 rotation;
+    Vector3 translation;
+};
+
+struct NumberRange {
+    float min, max;
+};
+
+struct Rect {
+    float X0, Y0, X1, Y1;
+};
+
+// just store the ptr, if the mf wants to fuck with a god damn color sequence attributes he can do it his fucking self
+struct ColorSequence { uintptr_t ptr; };
+struct NumberSequence { uintptr_t ptr; };
+struct Font { uintptr_t ptr; };
+
+// Instance attributes
+using AttributeValue = std::variant<
+    std::string,
+    bool,
+    double,
+    UDim,
+    UDim2,
+    int32_t, // brick color
+    Color3,
+    Vector2,
+    Vector3,
+    CFrame,
+    ColorSequence, // Color Sequence TODO IMPLEMENT
+    NumberSequence, // number sequence TODO IMPLEMENT
+    Font, // font TODO IMPLEMENT
+    NumberRange,
+    Rect
+>;
+
+struct Attribute {
+    std::string attribute_name;
+    AttributeValue attribute_value;
 };
 
 inline uintptr_t ShutUpFuckingWarning = 0; // death to clangd

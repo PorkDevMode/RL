@@ -1,11 +1,17 @@
 #pragma once
 
 #include "structs.h"
+#include <cstdint>
+#include <minwindef.h>
 #include <tlhelp32.h>
 #include <print>
 #include <vector>
 #include <cstddef>
 #include <winternl.h>
+
+/*
+only chatgpt, god and i know what the fuck i was thinking making this, dont even bother trying to refactor burn it and build it back up.
+*/
 
 namespace Memory {
 	class Mem {
@@ -307,6 +313,19 @@ namespace Memory {
 			}
 		}
 
+		std::string read_rtti(uintptr_t vtable) {
+			if (!process_info.process_handle) 
+				return "";
+
+			uintptr_t col_ptr = read<uintptr_t>(vtable - sizeof(uintptr_t));
+			if (!col_ptr)
+				return "";
+
+			MemoryStruct::RTTICompleteObjectLocator col = read<MemoryStruct::RTTICompleteObjectLocator>(col_ptr);
+			MemoryStruct::RTTITypeDescriptor type_descriptor = read<MemoryStruct::RTTITypeDescriptor>(process_info.base + col.pTypeDescriptor);
+
+			return type_descriptor.name;
+		}
 	private:
 		int get_pid(const char* process_name) {
 			int len = MultiByteToWideChar(CP_ACP, 0, process_name, -1, nullptr, 0);

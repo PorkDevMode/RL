@@ -20,7 +20,7 @@ namespace RBX {
 		Instance parent() const;
 		std::vector<Instance> get_children() const;
 		Instance find_first_child(const std::string& target_name) const;
-		void debug_print() const { std::println("Address: {:#x}\nName: {}\nClass Name: {}", m_address, name(), class_name()); } // for testing
+		void debug_print() const { std::println("Address: {:#x}\nName: {}\nClass Name: {}", m_address, name(), class_name()); } // cursed but for testing
 
 		template<typename T>
 		T as() const { return T(m_address); }

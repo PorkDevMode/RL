@@ -29,7 +29,7 @@ namespace RBX {
 		void set_requires_neck(bool value) const;
 
 		bool get_jump() const;
-		void set_jump() const;
+		void set_jump(bool value) const;
 
 		bool get_auto_rotate() const;
 		void set_auto_rotate(bool value) const;

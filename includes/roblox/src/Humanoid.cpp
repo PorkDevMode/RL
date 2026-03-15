@@ -100,10 +100,10 @@ bool RBX::Humanoid::get_jump() const {
     return mem.read<bool>(m_address + Offsets::Humanoid::Jump);
 }
 
-void RBX::Humanoid::set_jump() const {
+void RBX::Humanoid::set_jump(bool value) const {
     if (!class_valid())
         return;
-    mem.write<bool>(m_address + Offsets::Humanoid::Jump, true);
+    mem.write<bool>(m_address + Offsets::Humanoid::Jump, value);
 }
 
 bool RBX::Humanoid::get_auto_rotate() const {

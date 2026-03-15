@@ -37,6 +37,7 @@ std::string RBX::Instance::class_name() const {
 		std::string class_name = mem.read_rstr(class_name_ptr);
 		if (class_name.length() == 0) return "";
 
+		m_class_name = class_name;
 		return class_name;
 	}
 	else {

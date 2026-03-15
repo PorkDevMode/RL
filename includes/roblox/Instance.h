@@ -26,6 +26,6 @@ namespace RBX {
 		T as() const { return T(m_address); }
 	protected:
 		uintptr_t m_address = 0;
-		std::string m_class_name = "";
+		mutable std::string m_class_name = "";
 	};
 }
